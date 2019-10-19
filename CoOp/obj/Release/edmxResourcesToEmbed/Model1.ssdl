@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CoOpModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="GATUNEK">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAZWA" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="GRA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TYTUL" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="PLATFORMA" Type="int" />
+    <Property Name="GATUNEK" Type="int" />
+    <Property Name="INTERNET" Type="int" />
+    <Property Name="LAN" Type="int" />
+    <Property Name="SPLIT" Type="int" />
+    <Property Name="OBRAZEK" Type="nvarchar(max)" />
+    <Property Name="OPIS" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="PLATFORMA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NAZWA" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <Association Name="GRA_fk0">
+    <End Role="PLATFORMA" Type="Self.PLATFORMA" Multiplicity="0..1" />
+    <End Role="GRA" Type="Self.GRA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PLATFORMA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="GRA">
+        <PropertyRef Name="PLATFORMA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GRA_fk1">
+    <End Role="GATUNEK" Type="Self.GATUNEK" Multiplicity="0..1" />
+    <End Role="GRA" Type="Self.GRA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GATUNEK">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="GRA">
+        <PropertyRef Name="GATUNEK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="filterInternetGames" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Platforma" Type="int" Mode="In" />
+    <Parameter Name="Ilu" Type="int" Mode="In" />
+  </Function>
+  <Function Name="filterLANGames" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Platforma" Type="int" Mode="In" />
+    <Parameter Name="Ilu" Type="int" Mode="In" />
+  </Function>
+  <Function Name="filterSPLITGames" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Platforma" Type="int" Mode="In" />
+    <Parameter Name="Ilu" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getPCGames" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Ilu" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getPSGames" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Platforma" Type="int" Mode="In" />
+    <Parameter Name="Ilu" Type="int" Mode="In" />
+  </Function>
+  <Function Name="getXboxGames" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Platforma" Type="int" Mode="In" />
+    <Parameter Name="Ilu" Type="int" Mode="In" />
+  </Function>
+  <Function Name="removeGame" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Tytul" Type="nvarchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="CoOpModelStoreContainer">
+    <EntitySet Name="GATUNEK" EntityType="Self.GATUNEK" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GRA" EntityType="Self.GRA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PLATFORMA" EntityType="Self.PLATFORMA" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="GRA_fk0" Association="Self.GRA_fk0">
+      <End Role="PLATFORMA" EntitySet="PLATFORMA" />
+      <End Role="GRA" EntitySet="GRA" />
+    </AssociationSet>
+    <AssociationSet Name="GRA_fk1" Association="Self.GRA_fk1">
+      <End Role="GATUNEK" EntitySet="GATUNEK" />
+      <End Role="GRA" EntitySet="GRA" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

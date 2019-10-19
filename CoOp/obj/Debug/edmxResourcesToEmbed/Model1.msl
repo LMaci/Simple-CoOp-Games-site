@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CoOpModelStoreContainer" CdmEntityContainer="CoOpEntities">
+    <FunctionImportMapping FunctionImportName="filterInternetGames" FunctionName="CoOpModel.Store.filterInternetGames">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CoOpModel.filterInternetGames_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Tytul" ColumnName="Tytul" />
+          <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="filterLANGames" FunctionName="CoOpModel.Store.filterLANGames">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CoOpModel.filterLANGames_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Tytul" ColumnName="Tytul" />
+          <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="filterSPLITGames" FunctionName="CoOpModel.Store.filterSPLITGames">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CoOpModel.filterSPLITGames_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Tytul" ColumnName="Tytul" />
+          <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="getPCGames" FunctionName="CoOpModel.Store.getPCGames">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CoOpModel.getPCGames_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Tytul" ColumnName="Tytul" />
+          <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="getPSGames" FunctionName="CoOpModel.Store.getPSGames">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CoOpModel.getPSGames_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Tytul" ColumnName="Tytul" />
+          <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="getXboxGames" FunctionName="CoOpModel.Store.getXboxGames">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="CoOpModel.getXboxGames_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Tytul" ColumnName="Tytul" />
+          <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="GATUNEK">
+      <EntityTypeMapping TypeName="CoOpModel.GATUNEK">
+        <MappingFragment StoreEntitySet="GATUNEK">
+          <ScalarProperty Name="NAZWA" ColumnName="NAZWA" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GRA">
+      <EntityTypeMapping TypeName="CoOpModel.GRA">
+        <MappingFragment StoreEntitySet="GRA">
+          <ScalarProperty Name="OPIS" ColumnName="OPIS" />
+          <ScalarProperty Name="OBRAZEK" ColumnName="OBRAZEK" />
+          <ScalarProperty Name="SPLIT" ColumnName="SPLIT" />
+          <ScalarProperty Name="LAN" ColumnName="LAN" />
+          <ScalarProperty Name="INTERNET" ColumnName="INTERNET" />
+          <ScalarProperty Name="GATUNEK" ColumnName="GATUNEK" />
+          <ScalarProperty Name="PLATFORMA" ColumnName="PLATFORMA" />
+          <ScalarProperty Name="TYTUL" ColumnName="TYTUL" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PLATFORMA">
+      <EntityTypeMapping TypeName="CoOpModel.PLATFORMA">
+        <MappingFragment StoreEntitySet="PLATFORMA">
+          <ScalarProperty Name="NAZWA" ColumnName="NAZWA" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="removeGame" FunctionName="CoOpModel.Store.removeGame" />
+  </EntityContainerMapping>
+</Mapping>

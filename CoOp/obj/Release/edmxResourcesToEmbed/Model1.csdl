@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CoOpModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="CoOpEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="filterInternetGames" ReturnType="Collection(CoOpModel.filterInternetGames_Result)">
+      <Parameter Name="Platforma" Mode="In" Type="Int32" />
+      <Parameter Name="Ilu" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="filterLANGames" ReturnType="Collection(CoOpModel.filterLANGames_Result)">
+      <Parameter Name="Platforma" Mode="In" Type="Int32" />
+      <Parameter Name="Ilu" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="filterSPLITGames" ReturnType="Collection(CoOpModel.filterSPLITGames_Result)">
+      <Parameter Name="Platforma" Mode="In" Type="Int32" />
+      <Parameter Name="Ilu" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getPCGames" ReturnType="Collection(CoOpModel.getPCGames_Result)">
+      <Parameter Name="Ilu" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getPSGames" ReturnType="Collection(CoOpModel.getPSGames_Result)">
+      <Parameter Name="Platforma" Mode="In" Type="Int32" />
+      <Parameter Name="Ilu" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="getXboxGames" ReturnType="Collection(CoOpModel.getXboxGames_Result)">
+      <Parameter Name="Platforma" Mode="In" Type="Int32" />
+      <Parameter Name="Ilu" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="GATUNEK" EntityType="CoOpModel.GATUNEK" />
+    <EntitySet Name="GRA" EntityType="CoOpModel.GRA" />
+    <EntitySet Name="PLATFORMA" EntityType="CoOpModel.PLATFORMA" />
+    <AssociationSet Name="GRA_fk1" Association="CoOpModel.GRA_fk1">
+      <End Role="GATUNEK" EntitySet="GATUNEK" />
+      <End Role="GRA" EntitySet="GRA" />
+    </AssociationSet>
+    <AssociationSet Name="GRA_fk0" Association="CoOpModel.GRA_fk0">
+      <End Role="PLATFORMA" EntitySet="PLATFORMA" />
+      <End Role="GRA" EntitySet="GRA" />
+    </AssociationSet>
+    <FunctionImport Name="removeGame">
+      <Parameter Name="Tytul" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="filterInternetGames_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Tytul" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="nazwa" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="filterLANGames_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Tytul" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="nazwa" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="filterSPLITGames_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Tytul" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="nazwa" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="getPCGames_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Tytul" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Nazwa" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="getPSGames_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Tytul" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Nazwa" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="getXboxGames_Result">
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Tytul" Nullable="false" MaxLength="200" />
+    <Property Type="String" Name="Nazwa" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <EntityType Name="GATUNEK">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NAZWA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="GRA" Relationship="CoOpModel.GRA_fk1" FromRole="GATUNEK" ToRole="GRA" />
+  </EntityType>
+  <EntityType Name="GRA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TYTUL" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="PLATFORMA" Type="Int32" />
+    <Property Name="GATUNEK" Type="Int32" />
+    <Property Name="INTERNET" Type="Int32" />
+    <Property Name="LAN" Type="Int32" />
+    <Property Name="SPLIT" Type="Int32" />
+    <Property Name="OBRAZEK" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="OPIS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="GATUNEK1" Relationship="CoOpModel.GRA_fk1" FromRole="GRA" ToRole="GATUNEK" />
+    <NavigationProperty Name="PLATFORMA1" Relationship="CoOpModel.GRA_fk0" FromRole="GRA" ToRole="PLATFORMA" />
+  </EntityType>
+  <EntityType Name="PLATFORMA">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NAZWA" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="GRA" Relationship="CoOpModel.GRA_fk0" FromRole="PLATFORMA" ToRole="GRA" />
+  </EntityType>
+  <Association Name="GRA_fk1">
+    <End Type="CoOpModel.GATUNEK" Role="GATUNEK" Multiplicity="0..1" />
+    <End Type="CoOpModel.GRA" Role="GRA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GATUNEK">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="GRA">
+        <PropertyRef Name="GATUNEK" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="GRA_fk0">
+    <End Type="CoOpModel.PLATFORMA" Role="PLATFORMA" Multiplicity="0..1" />
+    <End Type="CoOpModel.GRA" Role="GRA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PLATFORMA">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="GRA">
+        <PropertyRef Name="PLATFORMA" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

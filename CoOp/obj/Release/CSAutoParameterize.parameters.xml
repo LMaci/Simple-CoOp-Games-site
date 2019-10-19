@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="CoOpEntities-Web.config Connection String" description="CoOpEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string='data source=maci.database.windows.net;initial catalog=CoOp;user id=maci;password=&quot;1939459989 Fe57a&quot;;MultipleActiveResultSets=True;App=EntityFramework'" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="g:\\Programy\\Visual\ Studio\ repo\\CoOp\\CoOp\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='CoOpEntities']/@connectionString" />
+  </parameter>
+</parameters>

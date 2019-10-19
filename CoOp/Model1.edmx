@@ -1,0 +1,343 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CoOpModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="GATUNEK">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAZWA" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="GRA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TYTUL" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="PLATFORMA" Type="int" />
+          <Property Name="GATUNEK" Type="int" />
+          <Property Name="INTERNET" Type="int" />
+          <Property Name="LAN" Type="int" />
+          <Property Name="SPLIT" Type="int" />
+          <Property Name="OBRAZEK" Type="nvarchar(max)" />
+          <Property Name="OPIS" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="PLATFORMA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NAZWA" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="GRA_fk0">
+          <End Role="PLATFORMA" Type="Self.PLATFORMA" Multiplicity="0..1" />
+          <End Role="GRA" Type="Self.GRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLATFORMA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GRA">
+              <PropertyRef Name="PLATFORMA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GRA_fk1">
+          <End Role="GATUNEK" Type="Self.GATUNEK" Multiplicity="0..1" />
+          <End Role="GRA" Type="Self.GRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GATUNEK">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GRA">
+              <PropertyRef Name="GATUNEK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="filterInternetGames" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Platforma" Type="int" Mode="In" />
+          <Parameter Name="Ilu" Type="int" Mode="In" />
+        </Function>
+        <Function Name="filterLANGames" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Platforma" Type="int" Mode="In" />
+          <Parameter Name="Ilu" Type="int" Mode="In" />
+        </Function>
+        <Function Name="filterSPLITGames" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Platforma" Type="int" Mode="In" />
+          <Parameter Name="Ilu" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getPCGames" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Ilu" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getPSGames" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Platforma" Type="int" Mode="In" />
+          <Parameter Name="Ilu" Type="int" Mode="In" />
+        </Function>
+        <Function Name="getXboxGames" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Platforma" Type="int" Mode="In" />
+          <Parameter Name="Ilu" Type="int" Mode="In" />
+        </Function>
+        <Function Name="removeGame" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Tytul" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="CoOpModelStoreContainer">
+          <EntitySet Name="GATUNEK" EntityType="Self.GATUNEK" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GRA" EntityType="Self.GRA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PLATFORMA" EntityType="Self.PLATFORMA" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="GRA_fk0" Association="Self.GRA_fk0">
+            <End Role="PLATFORMA" EntitySet="PLATFORMA" />
+            <End Role="GRA" EntitySet="GRA" />
+          </AssociationSet>
+          <AssociationSet Name="GRA_fk1" Association="Self.GRA_fk1">
+            <End Role="GATUNEK" EntitySet="GATUNEK" />
+            <End Role="GRA" EntitySet="GRA" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CoOpModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CoOpEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="filterInternetGames" ReturnType="Collection(CoOpModel.filterInternetGames_Result)">
+            <Parameter Name="Platforma" Mode="In" Type="Int32" />
+            <Parameter Name="Ilu" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="filterLANGames" ReturnType="Collection(CoOpModel.filterLANGames_Result)">
+            <Parameter Name="Platforma" Mode="In" Type="Int32" />
+            <Parameter Name="Ilu" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="filterSPLITGames" ReturnType="Collection(CoOpModel.filterSPLITGames_Result)">
+            <Parameter Name="Platforma" Mode="In" Type="Int32" />
+            <Parameter Name="Ilu" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getPCGames" ReturnType="Collection(CoOpModel.getPCGames_Result)" >
+          <Parameter Name="Ilu" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getPSGames" ReturnType="Collection(CoOpModel.getPSGames_Result)" >
+            <Parameter Name="Platforma" Mode="In" Type="Int32" />
+            <Parameter Name="Ilu" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="getXboxGames" ReturnType="Collection(CoOpModel.getXboxGames_Result)" >
+            <Parameter Name="Platforma" Mode="In" Type="Int32" />
+            <Parameter Name="Ilu" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="GATUNEK" EntityType="CoOpModel.GATUNEK" />
+          <EntitySet Name="GRA" EntityType="CoOpModel.GRA" />
+          <EntitySet Name="PLATFORMA" EntityType="CoOpModel.PLATFORMA" />
+          <AssociationSet Name="GRA_fk1" Association="CoOpModel.GRA_fk1">
+            <End Role="GATUNEK" EntitySet="GATUNEK" />
+            <End Role="GRA" EntitySet="GRA" />
+          </AssociationSet>
+          <AssociationSet Name="GRA_fk0" Association="CoOpModel.GRA_fk0">
+            <End Role="PLATFORMA" EntitySet="PLATFORMA" />
+            <End Role="GRA" EntitySet="GRA" />
+          </AssociationSet>
+          <FunctionImport Name="removeGame">
+            <Parameter Name="Tytul" Mode="In" Type="String" />
+          </FunctionImport>
+          </EntityContainer>
+        <ComplexType Name="filterInternetGames_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Tytul" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="nazwa" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="filterLANGames_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Tytul" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="nazwa" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="filterSPLITGames_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Tytul" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="nazwa" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="getPCGames_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Tytul" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Nazwa" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="getPSGames_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Tytul" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Nazwa" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="getXboxGames_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Tytul" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Nazwa" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="GATUNEK">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAZWA" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GRA" Relationship="CoOpModel.GRA_fk1" FromRole="GATUNEK" ToRole="GRA" />
+        </EntityType>
+        <EntityType Name="GRA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TYTUL" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PLATFORMA" Type="Int32" />
+          <Property Name="GATUNEK" Type="Int32" />
+          <Property Name="INTERNET" Type="Int32" />
+          <Property Name="LAN" Type="Int32" />
+          <Property Name="SPLIT" Type="Int32" />
+          <Property Name="OBRAZEK" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OPIS" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GATUNEK1" Relationship="CoOpModel.GRA_fk1" FromRole="GRA" ToRole="GATUNEK" />
+          <NavigationProperty Name="PLATFORMA1" Relationship="CoOpModel.GRA_fk0" FromRole="GRA" ToRole="PLATFORMA" />
+        </EntityType>
+        <EntityType Name="PLATFORMA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAZWA" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="GRA" Relationship="CoOpModel.GRA_fk0" FromRole="PLATFORMA" ToRole="GRA" />
+        </EntityType>
+        <Association Name="GRA_fk1">
+          <End Type="CoOpModel.GATUNEK" Role="GATUNEK" Multiplicity="0..1" />
+          <End Type="CoOpModel.GRA" Role="GRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GATUNEK">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GRA">
+              <PropertyRef Name="GATUNEK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="GRA_fk0">
+          <End Type="CoOpModel.PLATFORMA" Role="PLATFORMA" Multiplicity="0..1" />
+          <End Type="CoOpModel.GRA" Role="GRA" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PLATFORMA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="GRA">
+              <PropertyRef Name="PLATFORMA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CoOpModelStoreContainer" CdmEntityContainer="CoOpEntities">
+          <FunctionImportMapping FunctionImportName="filterInternetGames" FunctionName="CoOpModel.Store.filterInternetGames">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CoOpModel.filterInternetGames_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Tytul" ColumnName="Tytul" />
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="filterLANGames" FunctionName="CoOpModel.Store.filterLANGames">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CoOpModel.filterLANGames_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Tytul" ColumnName="Tytul" />
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="filterSPLITGames" FunctionName="CoOpModel.Store.filterSPLITGames">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CoOpModel.filterSPLITGames_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Tytul" ColumnName="Tytul" />
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getPCGames" FunctionName="CoOpModel.Store.getPCGames">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CoOpModel.getPCGames_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Tytul" ColumnName="Tytul" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getPSGames" FunctionName="CoOpModel.Store.getPSGames">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CoOpModel.getPSGames_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Tytul" ColumnName="Tytul" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="getXboxGames" FunctionName="CoOpModel.Store.getXboxGames">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="CoOpModel.getXboxGames_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Tytul" ColumnName="Tytul" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="GATUNEK">
+            <EntityTypeMapping TypeName="CoOpModel.GATUNEK">
+              <MappingFragment StoreEntitySet="GATUNEK">
+                <ScalarProperty Name="NAZWA" ColumnName="NAZWA" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GRA">
+            <EntityTypeMapping TypeName="CoOpModel.GRA">
+              <MappingFragment StoreEntitySet="GRA">
+                <ScalarProperty Name="OPIS" ColumnName="OPIS" />
+                <ScalarProperty Name="OBRAZEK" ColumnName="OBRAZEK" />
+                <ScalarProperty Name="SPLIT" ColumnName="SPLIT" />
+                <ScalarProperty Name="LAN" ColumnName="LAN" />
+                <ScalarProperty Name="INTERNET" ColumnName="INTERNET" />
+                <ScalarProperty Name="GATUNEK" ColumnName="GATUNEK" />
+                <ScalarProperty Name="PLATFORMA" ColumnName="PLATFORMA" />
+                <ScalarProperty Name="TYTUL" ColumnName="TYTUL" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PLATFORMA">
+            <EntityTypeMapping TypeName="CoOpModel.PLATFORMA">
+              <MappingFragment StoreEntitySet="PLATFORMA">
+                <ScalarProperty Name="NAZWA" ColumnName="NAZWA" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="removeGame" FunctionName="CoOpModel.Store.removeGame" />
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
